@@ -1,3 +1,17 @@
+<?php
+	$statusText = "";
+	require_once('connect_db.php');
+	
+	// Status after insertion of ingredient
+	if (isset($_GET['errors'])) {
+		$error = $_GET['errors'];
+
+		if ($error > 0) // an error occured
+			$statusText = "Der skete en fejl under oprettelse af elementet.";
+		else
+			$statusText = "Ny ingrediens indsat!";
+	} 	
+?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -9,24 +23,30 @@
 	</head>
 	<body>
 		<div class="container">
+			<div class="row col-sm-12">
+				<h1>Tilføj Ingrediens</h1>
+			</div>
+			
+			<!-- Form to create new ingredient -->
 			<form role="form" action="addIngredient.php" method="POST">
-				<div class="row">
-					<h1>Tilføj Ingrediens</h1>
-				</div>
-				
 				<div class="row">
 					<div class="form-group col-sm-8">
 						<label for="name">Navn:</label>
-						<input type="text" class="form-control" id="name">
+						<input type="text" class="form-control" name="name" id="name">
 					</div>
 					
 					<div class="form-group col-sm-4">
 						<label for="add">Tilføj:</label>
-						<button class="form-control" id="add">Tilføj</button>
+						<button class="form-control btn btn-default" type="submit" id="add">Tilføj</button>
 					</div>
 				</div>
-				
-				<div class="row col-sm-12">
+			</form>
+			<?php
+				if (strlen($statusText) > 0)
+					echo '<div class="row col-sm-12"><p>' . $statusText . '</p></div>';	
+			?>
+			<!-- Lists all ingredients -->
+			<div class="row col-sm-12">
 					<table class="table table-hover">
 						<thead>
 							<tr>
@@ -36,23 +56,21 @@
 						</thead>
 						
 						<tbody>
-							<tr>
-								<td>1</td>
-								<td>Løg</td>
-							</tr>
-							<tr>
-								<td>2</td>
-								<td>Salat</td>
-							</tr>
-							<tr>
-								<td>3</td>
-								<td>Tomat</td>
-							</tr>
-	
+							<?php
+								if ($result = $mysqli->query('SELECT id, name FROM ingredients')) {
+									while ($row = $result->fetch_assoc()) {
+										echo "<tr>";
+										echo "<td>" . $row['id'] . "</td>";
+										echo "<td>" . $row['name'] . "</td>";
+										echo "</tr>";
+									}
+								}	
+							?>
 						</tbody>
 					</table>
 				</div>
-			</form>
+
+			
 		</div>
 	</body>
 </html>

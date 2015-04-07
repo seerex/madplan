@@ -93,7 +93,14 @@
 	   		 </form>
    		 </div>
 		  	
-		  	
+		<div class="row">
+			<div class="col-sm-6 shoppingList">
+				<h3>Indkøbsliste</h3>
+			</div>
+			<div class="col-sm-6">
+				<h3>Nyheds sektion måske??</h3>
+			</div>
+		</div>
 			
 		</div>
 	</body>
