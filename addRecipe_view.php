@@ -6,10 +6,18 @@
 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+		<script>
+			$(document).ready(function(){
+			    
+			    
+			    
+			});
+		</script>
 	</head>
 	<body>
 		<div class="container">
-			<form role="form">
+			<form id="mainForm" role="form">
 				<div class="row">
 					<div class="form-group col-sm-3">
 						<label for="name">Navn:</label>
@@ -17,8 +25,7 @@
 					</div>
 					<div class="form-group col-sm-3">
 						<label for="imageUpload">Skift billede:</label>
-						<input class="form-control" type="file" name="imageUplaod" id="imageUpload" style="margin-bottom: 10px;">
-						<button class="form-control">upload</button>
+						<input class="form-control" type="file" name="imageUpload" id="imageUpload" style="margin-bottom: 10px;">
 					</div>
 					<div class="form-group col-sm-6">
 						<img src="http://i.kinja-img.com/gawker-media/image/upload/s--rc5NiOhM--/18zqjbdo1l118jpg.jpg" alt="recipe image" style="width: 300px; height: 200px;" />
