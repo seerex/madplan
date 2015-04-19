@@ -50,7 +50,6 @@
 							    
 			    // Shows a preview of the image
 			    $('#imageUpload').change(function() {
-				    alert("im here");
 					var file = $("#imageUpload")[0];
 					
 			        if (file.files && file.files[0]) {
@@ -64,13 +63,32 @@
 			        } else
 			        	alert("Failed");  
 				});
+				
+				
+				$('#addIngredient').click(function(event) {
+					event.preventDefault();
+					// Get info for ingredient
+					var name = $('#ingredientsName').val();
+					var amount = $('#amount').val();;
+					var unit = $('#unit').val();;
+					
+					if (name.length > 0 && amount.length > 0 && unit.length > 0) {
+						// Add to table
+						$('#ingredientsTable > tbody').append('<tr><td>' + name + '</td>' + '<td>' + amount + '</td>' + '<td>' + unit + '</td></tr>');
+						
+						// Clear textfield
+						$('#ingredientsName').val('');
+						$('#amount').val('');
+					} else
+						alert("Alle felter skal indtastes (navn, enhed og mængde)");
+				});
 			    
 			});
 		</script>
 	</head>
 	<body>
 		<div class="container">
-			<form id="mainForm" role="form">
+			<form id="mainForm" role="form" action="addRecipe.php" method="post" enctype="multipart/form-data">
 				<div class="row">
 					<div class="form-group col-sm-3">
 						<label for="name">Navn:</label>
@@ -110,7 +128,7 @@
 				
 				<div class="row">
 					<div class="col-sm-12">
-						<table class="table table-hover">
+						<table id="ingredientsTable" class="table table-hover">
 							<thead>
 								<tr>
 									<th>Navn</th>
@@ -119,16 +137,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>Løg</td>
-									<td>3</td>
-									<td>Stk.</td>
-								</tr>
-								<tr>
-									<td>Salat</td>
-									<td>250</td>
-									<td>gram</td>
-								</tr>
+								
 							</tbody>
 						</table>
 					</div>
@@ -143,7 +152,7 @@
 				
 				<div class="row">
 					<div class="form-group col-sm-12">
-						 <button type="submit" class="btn btn-default">Tilføj opskrift</button>
+						 <button type="submit" name="submit" class="btn btn-default">Tilføj opskrift</button>
 					</div>
 				</div>
 				
